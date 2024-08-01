@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>팀원 소개</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/other.css' %}">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #212529;
+            color: #fff;
+        }
+        .team-section {
+            text-align: center;
+            padding: 50px 0;
+        }
+        .team-section h1 {
+            font-size: 2.5em;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .team-member img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .team-member h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #334e68;
+        }
+        .team-member p {
+            font-size: 1em;
+            line-height: 1.5;
+            color: #7b8794;
+        }
+        .team-member .position {
+            font-weight: bold;
+            color: #e57373;
+            margin-bottom: 10px;
+        }
+        .team-member .description {
+            color: #334e68;
+        }
+        .row-center {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="http://43.203.249.177/" class="home-button">Home</a>
+    <div class="team-section">
+        <h1>TEAM INTRODUCTION</h1>
+        <div class="container">
+            <div class="row mb-5 row-center">
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="https://mblogthumb-phinf.pstatic.net/MjAxNzEyMjRfMjYg/MDAxNTE0MTA3MzM5Mzc5.D9XaME8Z_mRktq7UcaLth2uQpg1v3nC7sFGru4CWwCgg.fBjfTsM9LSH6k9R6b5tQJam4JtSXrC5CAnv7zI6X5Nsg.PNG.bluez3619995/20171224_182048.png?type=w800" alt="팀원 사진">
+                        <h2>강병관</h2>
+                        <p class="description">자알 놀다갑니다~!</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="https://item.kakaocdn.net/do/dc5faf5b285589cb05f8e63f625ebc968f324a0b9c48f77dbce3a43bd11ce785" alt="팀원 사진">
+                        <h2>문찬미</h2>                        
+                        <p class="description">STEP3도 화이팅입니다!</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="https://mblogthumb-phinf.pstatic.net/MjAxODA1MThfMzYg/MDAxNTI2NjI4OTA5Nzgw.BdKgTyaYNjSKXQIpN1LuSlDAJaGK9M3MRtynyvwsgGcg.2wqeXeLk3AUGU2v1wnJOkv9zis8wWjhi22p100a59Kkg.JPEG.magicch1/2%EB%B2%88%EA%B8%B0%EC%82%AC%EC%82%AC%EC%A7%84.jpg?type=w800" alt="팀원 사진">
+                        <h2>김가은</h2>
+                        <p class="description">만나서 반가웠습니다~! 앞으로도 아자 아자! 😄</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-center">
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202109/23/6149a03d-ca56-448d-9466-284882279ccd.jpg" alt="팀원 사진">
+                        <h2>백명선</h2>
+                        <p class="description">피곤한 하루</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="https://ifh.cc/g/GbGAg5.jpg" alt="팀원 사진">
+                        <h2>진희원</h2>
+                        <p class="description">7차 미프까지 수고하셨습니다~</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnqtkslYH9CzXVlMOJtBllA8020nLLjszlRg&s" alt="팀원 사진">
+                        <h2>양원석</h2>
+                        <p class="description">빅프로젝트 다들 힘내세요!</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGm55427it0y2ZAWyQgebtAyBTiu0u9u877A&s" alt="팀원 사진">
+                        <h2>최성민</h2>
+                        <p class="description">안녕히계세요</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

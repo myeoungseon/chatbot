@@ -1,0 +1,91 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up / Sign In</title>
+    </head><body>{% load static %}
+    <!-- Link to account.css -->
+    <link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <div class="wrapper">
+        <!-- 알림 메시지 -->
+        <div id="toast" class="toast">
+            <p id="toast-message"></p>
+        </div>
+        <div class="container">
+            <div class="form-container sign-up-container">
+                <form method="post" action="{% url 'personaccounts:sign' %}">
+                    {% csrf_token %}
+                    <h1>Create Account</h1>
+                    <span>or use your email for registration</span>
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password1" placeholder="Password">
+                    <small>Use at least 10 characters, combining letters, numbers, and special characters.</small>
+                    <input type="password" name="password2" placeholder="Confirm Password">
+                    <button type="submit" class="form_btn">Sign Up</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form method="post" action="{% url 'personaccounts:login' %}">
+                    {% csrf_token %}
+                    <h1>Sign In</h1>
+                    <div class="social-links">
+                        <div><a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></div>
+                        <div><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></div>
+                        <div><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></div>
+                    </div>
+                    <span>or use your account</span>
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit" class="form_btn">Sign In</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>To stay connected, please login with your personal info.</p>
+                        <button class="overlay_btn" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Enter your personal details and start your journey with us.</p>
+                        <button class="overlay_btn" id="signUp">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signUp').addEventListener('click', () => {
+            document.querySelector('.container').classList.add('right-panel-active');
+        });
+
+        document.getElementById('signIn').addEventListener('click', () => {
+            document.querySelector('.container').classList.remove('right-panel-active');
+        });
+
+        $(document).ready(function() {
+            // 메시지가 있을 때 토스트 메시지 표시
+            {% if messages %}
+                var messages = [];
+                {% for message in messages %}
+                    messages.push("{{ message }}");
+                {% endfor %}
+                var toast = document.getElementById("toast");
+                var messageText = messages.join("<br>");
+                document.getElementById("toast-message").innerHTML = messageText;
+                toast.classList.add("show");
+                setTimeout(function() {
+                    toast.classList.remove("show");
+                }, 3000);
+            {% endif %}
+        });
+    </script>
+
+
+</body></html>

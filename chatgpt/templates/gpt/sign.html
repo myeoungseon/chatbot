@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up / Sign In</title>
+    {% load static %}
+    <!-- Link to account.css -->
+    <link rel="stylesheet" href="{% static 'gpt/account.css' %}">
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="https://platform.twitter.com/widgets.js" async defer></script>
+    <!-- Instagram API does not have a direct client-side login, requires backend integration -->
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="sign-up-container">
+                <form method="post">
+                    {% csrf_token %}
+                    <h1>Create Account</h1>
+                    <span>or use your email for registration</span>
+                    <input type="email" name="email" placeholder="Email">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="password_check" placeholder="Check Password">
+                    <input type="text" name="name" placeholder="Name">
+                    <button type="submit" class="form_btn">Sign Up</button>
+                </form>
+            </div>
+            <div class="sign-in-container">
+                <form method="post">
+                    {% csrf_token %}
+                    <h1>Sign In</h1>
+                    <div class="social-links">
+                        <div><i class="fab fa-facebook-f" aria-hidden="true" id="facebook-login-btn"></i></div>
+                        <div><i class="fab fa-twitter" aria-hidden="true" id="twitter-login-btn"></i></div>
+                        <div><i class="fab fa-instagram" aria-hidden="true" id="instagram-login-btn"></i></div>
+                    </div>
+                    <span>or use your account</span>
+                    <input type="email" name="email" placeholder="Email">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit" class="form_btn">Sign In</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay-left">
+                    <h1>Welcome Back</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button id="signIn" class="overlay_btn">Sign In</button>
+                </div>
+                <div class="overlay-right">
+                    <h1>Hello, Friend</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button id="signUp" class="overlay_btn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signUp').addEventListener('click', () => {
+            document.querySelector('.container').classList.add('right-panel-active');
+        });
+
+        document.getElementById('signIn').addEventListener('click', () => {
+            document.querySelector('.container').classList.remove('right-panel-active');
+        });
+
+
+        // Facebook 로그인
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: 'YOUR_FACEBOOK_APP_ID',
+                cookie: true,
+                xfbml: true,
+                version: 'v10.0'
+            });
+        };
+        document.getElementById('facebook-login-btn').addEventListener('click', function() {
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    FB.api('/me', {fields: 'name,email'}, function(response) {
+                        console.log(response);
+                        alert('페이스북 로그인 성공');
+                        // 대시보드로 리디렉션
+                    });
+                } else {
+                    alert('페이스북 로그인 실패');
+                }
+            }, {scope: 'email'});
+        });
+
+        // Twitter 로그인
+        document.getElementById('twitter-login-btn').addEventListener('click', function() {
+            window.location.href = 'https://api.twitter.com/oauth/authenticate?oauth_token=YOUR_TWITTER_OAUTH_TOKEN';
+        });
+
+        // Instagram 로그인
+        document.getElementById('instagram-login-btn').addEventListener('click', function() {
+            window.location.href = 'https://api.instagram.com/oauth/authorize?client_id=YOUR_INSTAGRAM_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code';
+        });
+    </script>
+</body>
+</html>

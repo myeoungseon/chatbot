@@ -1,0 +1,42 @@
+{% comment %} <!-- templates/accounts/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="form-container sign-in-container">
+                <form method="post" action="{% url 'personaccounts:login' %}">
+                    {% csrf_token %}
+                    <h1>Sign In</h1>
+                    <span>or use your account</span>
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit" class="form_btn">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

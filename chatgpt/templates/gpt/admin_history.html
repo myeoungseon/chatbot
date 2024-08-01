@@ -1,0 +1,42 @@
+<!-- templates/admin_history.html -->
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'gpt/admin.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat History</title>
+</head>
+<body>
+    <h1>Chat History</h1>
+    <form method="get">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+        <button type="submit">Filter</button>
+    </form>
+    {% comment %} {% if start_date and end_date %} {% endcomment %}
+        <p>{{ start_date|date:"Y년 m월 d일" }}부터 {{ end_date|date:"Y년 m월 d일 0시" }}까지의 기간 조회 결과입니다.</p>
+    {% comment %} {% endif %} {% endcomment %}
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Query</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in history %}
+            <tr>
+                <td>{{ record.datetime }}</td>
+                <td>{{ record.query }}</td>
+                <td>{{ record.answer }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

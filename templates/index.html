@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>ChatBot</h1>
+<p class="lead"></p>
+<p class="lead">
+    <a href="{% url 'chatgpt:chat' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">Click</a>
+</p>
+
+{% endblock %}

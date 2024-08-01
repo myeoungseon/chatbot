@@ -1,0 +1,30 @@
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+<div id="chat">
+    {% if chat_history %}
+        <ul>
+            {% for msg in chat_history %}
+                {% if msg.role == "user" %}
+                    <li><strong>질문:</strong> {{ msg.content }}</li>
+                {% elif msg.role == "ai" %}
+                    <li><strong>답변:</strong> {{ msg.content }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> 채팅을 시작하세요.</p>
+    {% endif %}
+    
+    <form action="chat" method="post" enctype="application/x-www-form-urlencoded">
+        {% csrf_token %}
+        <div id="file-module-0">
+            <label for='question'>self chatgpt에게 요청하기</label>
+            <textarea id="question" name="question"></textarea>
+        </div>
+        <div><button id="text-button" type="submit" >질문</button></div>
+    </form>
+</div>
+
+

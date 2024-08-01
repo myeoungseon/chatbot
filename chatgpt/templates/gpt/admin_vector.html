@@ -1,0 +1,21 @@
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'gpt/admin.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector List</title>
+</head>
+<body>
+    <h1>Vector List</h1>
+    <ul>
+        {% for vector in vectors %}
+        <li>{{ vector.content }} - {{ vector.category }}</li>
+        {% endfor %}
+    </ul>
+    {% comment %} <a href="{% url 'add_vector' %}">Add Vector</a> {% endcomment %}
+</body>
+</html>

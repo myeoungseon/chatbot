@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>{% block title %}24조 7차 미니프로젝트{% endblock %}</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'gpt/style.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="d-flex h-100 text-center text-bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column justify-content-center align-items-center">
+        <header class="mb-auto w-100">
+            <div class="inner">
+                <a href="{% url 'home' %}" class="home-icon">
+                    <h3 class="float-md-start mb-0">TEAM24</h3>
+                </a>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" aria-current="page" href="{% url 'home' %}">Home</a>
+                    {% if request.user.is_authenticated %}
+                        <a class="nav-link fw-bold py-1 px-0" href="{% url 'personaccounts:logout' %}">Logout</a>
+                    {% else %}
+                        <a class="nav-link fw-bold py-1 px-0 {% if request.path == '/sign/' %}active{% endif %}" href="{% url 'personaccounts:sign' %}">Login</a>
+                    {% endif %}
+                    <a class="nav-link fw-bold py-1 px-0" href="{% url 'intro' %}">Introduce</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- 알림 메시지 -->
+        <div id="toast" class="toast">
+            <p id="toast-message"></p>
+        </div>
+
+        <main class="px-3 text-center">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 메시지가 있을 때 토스트 메시지 표시
+            {% if messages %}
+                var messages = [];
+                {% for message in messages %}
+                    messages.push("{{ message }}");
+                {% endfor %}
+                var toast = document.getElementById("toast");
+                var messageText = messages.join("<br>");
+                document.getElementById("toast-message").innerHTML = messageText;
+                toast.classList.add("show");
+                setTimeout(function() {
+                    toast.classList.remove("show");
+                }, 3000);
+            {% endif %}
+        });
+    </script>
+</body>
+</html>
